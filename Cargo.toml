@@ -5,3 +5,4 @@ authors = ["Kazuaki Ishiguro <kazuaki@couger.co.jp>"]
 edition = "2018"
 
 [dependencies]
+regex = "1.1.6"
