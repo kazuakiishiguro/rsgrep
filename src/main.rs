@@ -1,3 +1,4 @@
+use std::fs::File;
 use std::env;
 
 fn usage() {
@@ -9,6 +10,14 @@ fn main() {
        Some(filename) => filename,
        None => {
             usage();
+            return;
+       }
+   };
+
+   let file = match File::open(&filename) {
+       Ok(file) => file,
+       Err(e) => {
+            println!("An error occoured while opening file {}, {}", filename, e);
             return;
        }
    };
