@@ -1,3 +1,4 @@
+use std::io::{BufReader, BufRead};
 use std::fs::File;
 use std::env;
 
@@ -7,7 +8,7 @@ fn usage() {
 
 fn main() {
    let filename = match env::args().nth(2) {
-       Some(filename) => filename,
+       Some(filename) => filename, 
        None => {
             usage();
             return;
@@ -21,4 +22,16 @@ fn main() {
             return;
        }
    };
-}
+
+   let input = BufReader::new(file);
+   for line in input.lines() {
+       let line = match line {
+           Ok(line) => line,
+           Err(e) => {
+               println!("An error occoured while reading a line {}", e);
+               return;
+           }
+       };
+       println!("{}", line);
+   }
+ }
